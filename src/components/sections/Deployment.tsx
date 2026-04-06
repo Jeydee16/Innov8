@@ -9,9 +9,46 @@ import {
 } from 'lucide-react';
 import { FadeIn } from '../ui/FadeIn';
 
+const TechLogo = ({ name, logo }: { name: string, logo: string }) => {
+  const [error, setError] = useState(false);
+  
+  if (error || !logo) {
+    return <span className="text-lg font-bold text-slate-300 whitespace-nowrap px-4">{name}</span>;
+  }
+  
+  return (
+    <img 
+      src={logo} 
+      alt={name} 
+      className="h-full object-contain max-w-[100px] transition-all duration-300" 
+      referrerPolicy="no-referrer"
+      onError={() => setError(true)}
+    />
+  );
+};
+
 const Deployment = () => {
-  const tech1 = ['Microsoft 365', 'Google Workspace', 'AWS', 'Microsoft 365', 'Google Workspace', 'AWS'];
-  const tech2 = ['Cisco', 'HP', 'Fortinet', 'Aruba', 'Meraki', 'Cisco', 'HP', 'Fortinet', 'Aruba', 'Meraki'];
+  const baseTech1 = [
+    { name: 'Microsoft 365', logo: 'https://cdn.simpleicons.org/microsoft365/white' },
+    { name: 'Google Workspace', logo: 'https://cdn.simpleicons.org/googleworkspace/white' },
+    { name: 'AWS', logo: 'https://cdn.simpleicons.org/amazonaws/white' },
+    { name: 'Azure', logo: 'https://cdn.simpleicons.org/microsoftazure/white' },
+    { name: 'Cloudflare', logo: 'https://cdn.simpleicons.org/cloudflare/white' },
+    { name: 'DigitalOcean', logo: 'https://cdn.simpleicons.org/digitalocean/white' },
+  ];
+  const tech1 = [...baseTech1, ...baseTech1, ...baseTech1, ...baseTech1];
+
+  const baseTech2 = [
+    { name: 'Cisco', logo: 'https://cdn.simpleicons.org/cisco/white' },
+    { name: 'HP', logo: 'https://cdn.simpleicons.org/hp/white' },
+    { name: 'Fortinet', logo: 'https://cdn.simpleicons.org/fortinet/white' },
+    { name: 'Dell', logo: 'https://cdn.simpleicons.org/dell/white' },
+    { name: 'Lenovo', logo: 'https://cdn.simpleicons.org/lenovo/white' },
+    { name: 'Ubiquiti', logo: 'https://cdn.simpleicons.org/ubiquiti/white' },
+    { name: 'Juniper', logo: 'https://cdn.simpleicons.org/junipernetworks/white' },
+    { name: 'Palo Alto', logo: 'https://cdn.simpleicons.org/paloaltonetworks/white' }
+  ];
+  const tech2 = [...baseTech2, ...baseTech2, ...baseTech2, ...baseTech2];
 
   return (
     <section id="deployment" className="py-24 bg-slate-900 text-white relative overflow-hidden">
@@ -62,9 +99,11 @@ const Deployment = () => {
                 <div className="relative w-full flex overflow-x-hidden group">
                   <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-slate-800 to-transparent z-10"></div>
                   <div className="absolute top-0 right-0 w-8 h-full bg-gradient-to-l from-slate-800 to-transparent z-10"></div>
-                  <div className="flex animate-scroll whitespace-nowrap gap-6 py-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                  <div className="flex animate-scroll whitespace-nowrap gap-12 py-2 items-center">
                     {tech1.map((tech, idx) => (
-                      <span key={idx} className="font-bold shrink-0">{tech}</span>
+                      <div key={idx} className="h-10 shrink-0 flex items-center justify-center transition-all duration-300 opacity-50 hover:opacity-100">
+                        <TechLogo name={tech.name} logo={tech.logo} />
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -96,9 +135,11 @@ const Deployment = () => {
                 <div className="relative w-full flex overflow-x-hidden group">
                   <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-slate-800 to-transparent z-10"></div>
                   <div className="absolute top-0 right-0 w-8 h-full bg-gradient-to-l from-slate-800 to-transparent z-10"></div>
-                  <div className="flex animate-scroll whitespace-nowrap gap-6 py-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                  <div className="flex animate-scroll whitespace-nowrap gap-12 py-2 items-center">
                     {tech2.map((tech, idx) => (
-                      <span key={idx} className="font-bold shrink-0">{tech}</span>
+                      <div key={idx} className="h-10 shrink-0 flex items-center justify-center transition-all duration-300 opacity-50 hover:opacity-100">
+                        <TechLogo name={tech.name} logo={tech.logo} />
+                      </div>
                     ))}
                   </div>
                 </div>

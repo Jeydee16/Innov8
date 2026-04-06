@@ -9,10 +9,33 @@ import {
 } from 'lucide-react';
 import { FadeIn } from '../ui/FadeIn';
 
+const TechLogo = ({ name, logo }: { name: string, logo: string }) => {
+  const [error, setError] = useState(false);
+  
+  if (error || !logo) {
+    return <span className="text-xl md:text-2xl font-bold text-slate-200 tracking-wide whitespace-nowrap">{name}</span>;
+  }
+  
+  return (
+    <img 
+      src={logo} 
+      alt={name} 
+      className="h-8 md:h-10 object-contain opacity-70 hover:opacity-100 transition-opacity" 
+      referrerPolicy="no-referrer"
+      onError={() => setError(true)}
+    />
+  );
+};
+
 const Partners = () => {
-  const partners = [
-    "AWS", "Google Cloud", "Azure", "Cisco", "HP", "Fortinet", "Aruba", "Meraki", "Huawei", "VST ECS", "ByteStraits", "Agmo Studio"
+  const basePartners = [
+    { name: "VST ECS", logo: "https://logo.clearbit.com/vstecs.ph" },
+    { name: "ByteStraits", logo: "https://logo.clearbit.com/bytestraits.com" },
+    { name: "Agmo Studio", logo: "https://logo.clearbit.com/agmostudio.com" },
+    { name: "AWS", logo: "https://cdn.simpleicons.org/amazonaws/white" }
   ];
+  
+  const partners = [...basePartners, ...basePartners, ...basePartners, ...basePartners, ...basePartners, ...basePartners, ...basePartners, ...basePartners];
 
   return (
     <section id="partners" className="py-24 bg-slate-900 overflow-hidden relative">
@@ -44,13 +67,13 @@ const Partners = () => {
         <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-slate-900 to-transparent z-20 pointer-events-none"></div>
         
         <div className="flex animate-scroll whitespace-nowrap py-4 hover:[animation-play-state:paused]">
-          {[...partners, ...partners, ...partners].map((partner, idx) => (
+          {partners.map((partner, idx) => (
             <motion.div 
               key={idx} 
               whileHover={{ y: -5, scale: 1.05, boxShadow: "0 10px 30px -10px rgba(6, 182, 212, 0.3)" }}
               className="mx-4 md:mx-6 flex items-center justify-center px-8 py-6 bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-2xl hover:bg-slate-800 transition-all cursor-pointer min-w-[200px]"
             >
-              <span className="text-xl md:text-2xl font-bold text-slate-200 tracking-wide">{partner}</span>
+              <TechLogo name={partner.name} logo={partner.logo} />
             </motion.div>
           ))}
         </div>

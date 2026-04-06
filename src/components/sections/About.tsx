@@ -11,7 +11,16 @@ import { FadeIn } from '../ui/FadeIn';
 import { AnimatedCounter } from '../ui/AnimatedCounter';
 
 const About = () => {
-  const certs = ["AWS", "Google Cloud", "Azure", "Cisco", "CompTIA", "ITIL", "PMP", "Fortinet"];
+  const certs = [
+    { name: "AWS", logo: "https://logo.uplead.com/aws.amazon.com" },
+    { name: "Google Cloud", logo: "https://logo.uplead.com/cloud.google.com" },
+    { name: "Azure", logo: "https://logo.uplead.com/azure.microsoft.com" },
+    { name: "Cisco", logo: "https://logo.uplead.com/cisco.com" },
+    { name: "CompTIA", logo: "https://logo.uplead.com/comptia.org" },
+    { name: "ITIL", logo: "https://logo.uplead.com/axelos.com" },
+    { name: "PMP", logo: "https://logo.uplead.com/pmi.org" },
+    { name: "Fortinet", logo: "https://logo.uplead.com/fortinet.com" }
+  ];
   const stats = [
     { number: 20, suffix: "+", label: "Years Experience" },
     { number: 5, suffix: "", label: "Core Pillars" },
@@ -60,9 +69,11 @@ const About = () => {
                   <div className="relative w-full flex overflow-x-hidden">
                     <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
                     <div className="absolute top-0 right-0 w-8 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
-                    <div className="flex animate-scroll whitespace-nowrap gap-2 py-1">
-                      {[...certs, ...certs, ...certs].map((cert, idx) => (
-                        <span key={idx} className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full shrink-0 group-hover:bg-cyan-50 group-hover:text-cyan-700 transition-colors duration-300">{cert}</span>
+                    <div className="flex animate-scroll whitespace-nowrap gap-8 py-2 items-center">
+                      {[...certs, ...certs, ...certs, ...certs].map((cert, idx) => (
+                        <div key={idx} className="h-8 shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                          <img src={cert.logo} alt={cert.name} className="h-full object-contain max-w-[100px]" referrerPolicy="no-referrer" />
+                        </div>
                       ))}
                     </div>
                   </div>
